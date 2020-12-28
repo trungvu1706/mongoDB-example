@@ -13,23 +13,10 @@ mongoose.connect(MONGO_URI, {
 
 }).then(async() => { // context => this
     console.log('connected successfully to server');
-
-    // const post = new Post({
-    //     title: 'thuy kieu',
-    //     content: 'def'
-    // })
-    // await post.save();
-
-    // const user = await User.create({ // user is instance of User
-    //     name: 'Trungvu',
-    //     email: 'vtrung1795@gmail.com',
-    //     password: '123'
-    // });
-    // console.log(user);
-    // const isPasswordCorrect = await user.isPasswordCorrect('123'); //  => instance method
-
-    const activeUsers = await User.findActiveUser(); // => static method
-    // console.log({ isPasswordCorrect });
+    const user = await User.findById("5fe9fa2e3399dd9329ad91d6").select({
+        password: 1 // select value thi de value la 1 , con khong select value thi de value la 0 
+    })
+    console.log(await user.isPasswordCorrect('123'));
     mongoose.disconnect();
 }).catch((err) => {
     console.error(err);

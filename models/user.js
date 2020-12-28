@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const moment = require('moment'); // chua cai moment
+// const moment = require('moment'); // chua cai moment
 const { User } = require('.');
 
 const schema = new mongoose.Schema({
@@ -28,11 +28,11 @@ schema.methods.isPasswordCorrect = function(password) { // defined a document me
     return bcrypt.compare(password, this.password); // this represents user (document) not User 
 }
 
-schema.statics.findActiveUser = function() { // defined model method 
-    const sevenDaysAgo = moment().subtract(7, 'day').toDate();
-    return this.find({ // this represents User 
-        $lte: sevenDaysAgo
-    })
-}
+// schema.statics.findActiveUser = function() { // defined model method 
+//     const sevenDaysAgo = moment().subtract(7, 'day').toDate();
+//     return this.find({ // this represents User 
+//         $lte: sevenDaysAgo
+//     })
+// }
 
 module.exports = mongoose.model('User', schema);
